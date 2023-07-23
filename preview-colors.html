@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Preview Colors</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <style type="text/css">
+      #chart {
+        background-color: #111111;
+        color: #eeeeee;
+        font-family: sans-serif;
+        font-size: 14px;
+        border-color: #eeeeee;
+        border-style: solid;
+        border-width: 1px;
+        overflow: hidden;
+        min-width: 300px;
+        max-width: 600px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: row;
+
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+        border-radius: 2px;
+      }
+      .single {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        vertical-align: center;
+      }
+      #plum {
+        background-color: #8b133c;
+      }
+      #magenta {
+        background-color: #c42775;
+      }
+      #leaf {
+        background-color: #89ce00;
+        color: #111111;
+      }
+      #green {
+        background-color: #407500;
+      }
+      #blue {
+        background-color: #0067cf;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart">
+      <div class="row">
+        <div class="single">Color</div>
+        <div class="single">Hex</div>
+        <div class="single">Text color</div>
+      </div>
+      <div
+        class="row"
+        id="plum"
+      >
+        <div class="single">Plum</div>
+        <div class="single"><code>#8b133c</code></div>
+        <div class="single"><code>#eeeeee</code></div>
+      </div>
+      <div
+        class="row"
+        id="magenta"
+      >
+        <div class="single">Magenta</div>
+        <div class="single">#e6308a</div>
+        <div class="single"><code>#eeeeee</code></div>
+      </div>
+      <div
+        class="row"
+        id="green"
+      >
+        <div class="single">Green</div>
+        <div class="single">#5ba300</div>
+        <div class="single"><code>#eeeeee</code></div>
+      </div>
+      <div
+        class="row"
+        id="leaf"
+      >
+        <div class="single">Leaf</div>
+        <div class="single"><code>#bb2861</code></div>
+        <div class="single"><code>#eeeeee</code></div>
+      </div>
+      <div
+        class="row"
+        id="blue"
+      >
+        <div class="single">Blue</div>
+        <div class="single"><code>#5ba300</code></div>
+        <div class="single"><code>#eeeeee</code></div>
+      </div>
+    </div>
+  </body>
+</html>
