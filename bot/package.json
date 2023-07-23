@@ -1,0 +1,52 @@
+{
+    "name": "dinosaur-ai",
+    "version": "0.0.1",
+    "description": "Tools for the lazy bookworm.",
+    "author": "Corina Gum",
+    "license": "MIT",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
+    "scripts": {
+        "build": "tsc --build && shx cp -r ./src/prompts ./lib/",
+        "clean": "rimraf node_modules lib tsconfig.tsbuildinfo",
+        "lint": "eslint **/src/**/*.{j,t}s{,x} --fix --no-error-on-unmatched-pattern",
+        "start": "tsc --build && node ./lib/index.js",
+        "test": "npm-run-all build test:mocha",
+        "watch": "nodemon --watch ./src -e ts --exec \"yarn start\"",
+        "dev:teamsfx": "nodemon --exec node --inspect=9239 --signal SIGINT -r ts-node/register ./src/index.ts",
+        "test:mocha": "nyc mocha tests",
+        "test:compat": "api-extractor run --verbose"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/corinagum/dinosaur"
+    },
+    "dependencies": {
+        "@microsoft/teams-ai": "~0.1.0-preview.2",
+        "axios": "^1.4.0",
+        "botbuilder-azure-blobs": "^4.20.0",
+        "botbuilder": "^4.20.0",
+        "dotenv": "^16.3.1",
+        "replace": "~1.2.2",
+        "restify": "~11.1.0"
+    },
+    "devDependencies": {
+        "@types/dotenv": "8.2.0",
+        "@types/restify": "8.5.7",
+        "eslint-config-prettier": "^8.8.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jsdoc": "^46.4.4",
+        "eslint": "^8.45.0",
+        "exorcist": "^2.0.0",
+        "nodemon": "3.0.1",
+        "rimraf": "^5.0.1",
+        "shx": "^0.3.3",
+        "tinyify": "^4.0.0",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.1.6"
+    },
+    "files": [
+        "lib",
+        "src"
+    ]
+}
