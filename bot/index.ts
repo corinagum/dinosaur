@@ -6,20 +6,27 @@ import {
     CloudAdapter,
     ConfigurationBotFrameworkAuthentication,
     ConfigurationBotFrameworkAuthenticationOptions,
-    MemoryStorage,
     TurnContext,
 } from 'botbuilder';
 
 const ENV_FILE = path.join(__dirname, '..', '.env');
 config({ path: ENV_FILE });
 
+if (!process.env.OpenAIKey || !process.env.BOT_ID || !process.env.BOT_DOMAIN || !process.env.BOT_ENDPOINT) {
+    throw new Error(`Missing environment variables - please check following values:
+    ${!process.env.OpenAIKey ? `\nOpenAIKey` : ''}
+    ${!process.env.BOT_ID ? `\nBOT_ID` : ''}
+    ${!process.env.BOT_DOMAIN ? `\nBOT_DOMAIN` : ''}
+    ${!process.env.BOT_ENDPOINT ? `\nENDPOINT` : ''}
+    `);
+    // ${!process.env.xyz ? 'APPM?password' : ''}
+}
+
 const botFrameworkAuthentication = new ConfigurationBotFrameworkAuthentication(
     process.env as ConfigurationBotFrameworkAuthenticationOptions,
 );
 
 const adapter = new CloudAdapter(botFrameworkAuthentication);
-
-const storage = new MemoryStorage();
 
 // Catch-all for errors.
 const onTurnErrorHandler = async (context: TurnContext, error: Error) => {
@@ -40,7 +47,9 @@ const onTurnErrorHandler = async (context: TurnContext, error: Error) => {
 
 adapter.onTurnError = onTurnErrorHandler;
 
-const server = restify.createServer();
+const server = restify.createServer({
+    name: 'Dinosaur Agent'
+});
 server.use(restify.plugins.bodyParser());
 
 server.listen(process.env.port || process.env.PORT || 3978, () => {
@@ -50,12 +59,12 @@ server.listen(process.env.port || process.env.PORT || 3978, () => {
 });
 
 // Listen for incoming server requests and forward to bot.
-import * as bot from './ai';
+import * as app from './ai';
 server.post('/api/messages', async (req, res, next) => {
     // Route received a request to adapter for processing
-    await adapter.process(req, res as any, async (context) => {
+    await adapter.process(req, res as any, async (context: TurnContext) => {
         // Dispatch to application for routing
-        await bot.run(context);
+        await app.run(context);
     });
     return next();
 });
