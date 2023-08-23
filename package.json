@@ -2,18 +2,17 @@
   "author": "corinagum",
   "name": "dinosaur",
   "version": "0.0.1",
-  "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build --watch",
+    "build": "tsc --build && vite build --watch",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "doctor": "eslint **/src/**/*.{j,t}s{,x} --fix --no-error-on-unmatched-pattern"
   },
   "dependencies": {
     "css-modules": "^0.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",

@@ -25,3 +25,6 @@ dist-ssr
 *.sw?
 
 NOTES.md
+env/**/.env
+env/**/.env.*
+env/.env.staging
